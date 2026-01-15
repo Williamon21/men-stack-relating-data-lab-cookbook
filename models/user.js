@@ -1,16 +1,24 @@
 const mongoose = require('mongoose');
 
-const userSchema = mongoose.Schema({
+const foodSchema = new mongoose.Schema({
+  name: { type: String, required: true, trim: true },
+});
+
+const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
+    trim: true,
   },
   password: {
     type: String,
     required: true,
   },
+  pantry: {
+    type: [foodSchema],
+    default: [],
+  },
 });
 
-const User = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);
 
-module.exports = User;
